@@ -1,0 +1,26 @@
+version: "3.7"
+x-logging: &default-logging
+  options:
+    max-size: "100m"
+    max-file: "5"
+  driver: json-file
+services:
+  oauth:
+    image: quay.io/pusher/oauth2_proxy:v3.1.0
+    container_name: airbyte-oauth
+    ports:
+      - "4180:4180"
+    depends_on:
+      - webapp
+    command: [
+        "--cookie-secure=true",
+        "--upstream=http://webapp",
+        "--http-address=0.0.0.0:4180",
+        "--redirect-url=${OAUTH_REDIRECT_URL}",
+        "--cookie-secret=${COOKIE_SECRET}",
+        "--client-id=${OAUTH_CLIENT_ID}",
+        "--client-secret=${OAUTH_CLIENT_SECRET}",
+        "--email-domain=${ALLOWED_EMAIL_DOMAINS}",
+        "--proxy-prefix=${PROXY_PREFIX}",
+        "--authenticated-emails-file=${AUTHENTICATED_EMAILS_FILE:-./oauth-allowed-emails.txt}"
+    ]
