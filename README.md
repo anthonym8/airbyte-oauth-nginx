@@ -63,12 +63,11 @@ docker run -t --rm -v /opt/airbyte/certs/letsencrypt:/etc/letsencrypt -v /opt/ai
 ```
 
 1. Uncomment this line in `docker-compose-nginx.yml`:
-
-```sh
+```
     volumes:
       - ./nginx-default.conf:/etc/nginx/conf.d/default.conf
       - ./nginx-http.conf:/etc/nginx/conf.d/http.conf
---->  # - ./nginx-https.conf:/etc/nginx/conf.d/https.conf 
+      # - ./nginx-https.conf:/etc/nginx/conf.d/https.conf    <--- uncomment
       - ./certs/letsencrypt:/etc/letsencrypt
       - ./certs/certbot:/etc/certbot
 ```
