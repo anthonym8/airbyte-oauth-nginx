@@ -12,6 +12,8 @@ services:
       - "4180:4180"
     depends_on:
       - webapp
+    volumes:
+      - ./oauth-allowed-emails.txt:/oauth-allowed-emails.txt
     command: [
         "--cookie-secure=true",
         "--upstream=http://webapp",
@@ -20,7 +22,5 @@ services:
         "--cookie-secret=${COOKIE_SECRET}",
         "--client-id=${OAUTH_CLIENT_ID}",
         "--client-secret=${OAUTH_CLIENT_SECRET}",
-        "--email-domain=${ALLOWED_EMAIL_DOMAINS}",
-        "--proxy-prefix=${PROXY_PREFIX}",
         "--authenticated-emails-file=${AUTHENTICATED_EMAILS_FILE:-./oauth-allowed-emails.txt}"
     ]

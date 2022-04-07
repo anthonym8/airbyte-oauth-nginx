@@ -26,13 +26,14 @@ COOKIE_SECRET=
 OAUTH_REDIRECT_URL=
 OAUTH_CLIENT_ID=
 OAUTH_CLIENT_SECRET=
-ALLOWED_EMAIL_DOMAINS=
 ```
     - For `COOKIE_SECRET`, generate via `openssl rand -hex 32`
     - For `OAUTH_REDIRECT_URL`, set to your Airbyte public address + `/callback`, e.g. `https://airbyte.mydomain.com/callback` [[reference]](https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/oauth_provider)
     - For `OAUTH_CLIENT_ID`, `OAUTH_CLIENT_SECRET`, create Google OAuth credentials on GCP.
-    - For `ALLOWED_EMAIL_DOMAINS`, set to your organization's email domain.
-    
+
+1. Input list of emails allowed to access Airbyte.
+    - One email address per line in `oauth-allowed-emails.txt`
+
 1. Set `server_name` to your Airbyte public address.
     - In `nginx-http.conf`:
     ```sh
